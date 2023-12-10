@@ -103,4 +103,94 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'andel-pane',
+		nazev: 'Anděl Páně',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w663/files/images/film/posters/161/570/161570271_977e95.jpg',
+			sirka: 638,
+			vyska: 739,
+		},
+		ochutnavka: 'Česká vánoční pohádka.',
+		popis:
+			'Naivní anděl a zákeřný čert a jejich strasti při pozemské pouti',
+		premiera: '2024-11-03',
+	},
 ]
+
+//hamburger menu na stránce Film
+
+const classShowOrHide3 = (menuTlacitko3, menuPolozky3, menuTlacitkoIcon3) => {
+     if (menuPolozky3.classList.contains("show")) {
+       menuPolozky3.classList.remove("show")
+       menuTlacitkoIcon3.classList.add("fa-bars")
+       menuTlacitkoIcon3.classList.remove("fa-xmark")
+     } else {
+          menuPolozky3.classList.add("show")
+          menuTlacitkoIcon3.classList.remove("fa-bars")
+          menuTlacitkoIcon3.classList.add("fa-xmark")
+     }
+     
+   }
+
+
+const menuTlacitko3 = document.querySelector("#menuTlacitko3")
+const menuTlacitkoIcon3 = document.querySelector("#menuTlacitkoIcon3")
+const menuPolozky3 = document.querySelector("#menu-polozky3")
+menuTlacitko3.addEventListener("click", function(event) {
+     console.log(event.target)
+     classShowOrHide3(menuTlacitko3, menuPolozky3, menuTlacitkoIcon3)
+   })
+
+//nastaveni data premiery ke kazdemu filmu, -nepovinne: metoda hash a přidání popisu, plakátu, názvu do detailu filmu
+const classPremiera = document.querySelector("#premiera") 
+
+const id = location.hash.slice(1)
+const film = filmy.find(f => f.id === id)
+
+console.log(film)
+
+const detailFilmu = document.querySelector("#detail-filmu")
+
+
+
+// přidat datum premiéry ke každému filmu a zjistit, jak dlouho od/do premiéry je
+
+const premiera = document.querySelector("#premiera")
+
+const premieraDatum = dayjs(film.premiera).format('D.M.YYYY')
+const premmieraDaysDiff = dayjs(film.premiera).diff(dayjs(), 'days')
+
+premiera.innerHTML = `Premiéra <strong>${premieraDatum}.</strong>, což je za ${premmieraDaysDiff} dní.`
+
+
+//klikání na hvězdičky
+
+let lastStar = 1
+
+const starAdjustment = (starId) => {
+	const stars = document.querySelectorAll(".fa-star")
+	for(let i=0;i<stars.length;i++) {
+		const star = stars[i]
+		if(i <= starId) {
+			star.classList.remove('far')
+			star.classList.add('fas')
+		} else {
+			star.classList.add('far')
+			star.classList.remove('fas')
+		}
+	}
+}
+
+starAdjustment(lastStar)
+
+const stars = document.querySelectorAll(".fa-star")
+
+stars.forEach((it, ind) => {
+	it.addEventListener("click", () => {
+		lastStar = ind
+		starAdjustment(ind)
+	})
+	it.addEventListener("mouseenter", () => starAdjustment(ind))
+	it.addEventListener("mouseleave", () => starAdjustment(lastStar))
+})

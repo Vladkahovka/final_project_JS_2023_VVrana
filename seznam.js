@@ -103,4 +103,73 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'andel-pane',
+		nazev: 'Anděl Páně',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w663/files/images/film/posters/161/570/161570271_977e95.jpg',
+			sirka: 638,
+			vyska: 739,
+		},
+		ochutnavka: 'Česká vánoční pohádka.',
+		popis:
+			'Naivní anděl a zákeřný čert a jejich strasti při pozemské pouti',
+		premiera: '2024-11-03',
+	},
 ]
+//hamburger menu na strance Seznam
+
+const classShowOrHide1 = (menuTlacitko1, menuPolozky1, menuTlacitkoIcon1) => {
+     if (menuPolozky1.classList.contains("show")) {
+       menuPolozky1.classList.remove("show")
+       menuTlacitkoIcon1.classList.add("fa-bars")
+       menuTlacitkoIcon1.classList.remove("fa-xmark")
+     } else {
+          menuPolozky1.classList.add("show")
+          menuTlacitkoIcon1.classList.remove("fa-bars")
+          menuTlacitkoIcon1.classList.add("fa-xmark")
+     }
+     
+   }
+
+
+const menuTlacitko1 = document.querySelector("#menutlacitko1")
+const menuTlacitkoIcon1 = document.querySelector("#menutlacitkoicon1")
+const menuPolozky1 = document.querySelector("#menu-polozky1")
+menuTlacitko1.addEventListener("click", function(event) {
+     console.log(event.target);
+     classShowOrHide1(menuTlacitko1, menuPolozky1, menuTlacitkoIcon1)
+   })
+
+//odchycení id seznamu a vymazání vnitřního html
+
+const seznamFilmu = document.querySelector("#seznam-filmu")
+
+document.getElementById(seznamFilmu)
+seznamFilmu.innerHTML = ""
+
+//pomocí forEach přidání zadaných údajů ke všem filmům
+
+
+filmy.forEach(film => {
+	const div = document.createElement('div')
+	div.className = 'col'
+	div.innerHTML = `
+	  <div class="card">
+	    <img
+		 src=${film.plakat.url}
+		 width=${film.plakat.sirka}
+		 height=${film.plakat.vyska}
+		 class="card-img-top"
+		 alt="plakát"
+	    />
+	    <div class="card-body">
+		 <h5 class="card-title">${film.nazev}</h5>
+		 <p class="card-text">${film.ochutnavka}</p>
+		 <a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
+	    </div>
+	  </div>
+	`
+	seznamFilmu.appendChild(div)
+   })
+

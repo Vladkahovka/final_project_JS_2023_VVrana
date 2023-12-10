@@ -19,8 +19,7 @@
 		/>
 		<script src="mdb5-standard-UI-kit-free-6.0.1/js/mdb.min.js" defer></script>
 		<link rel="stylesheet" href="styly.css" />
-		<script src="spolecne.js" type="module"></script>
-		<script src="film.js" type="module"></script>
+		<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 	</head>
 	<body>
 		<!-- Navigace -->
@@ -29,12 +28,12 @@
 				<button
 					class="navbar-toggler"
 					type="button"
-					id="menu-tlacitko"
+					id="menuTlacitko3"
 					aria-label="menu"
 				>
-					<i class="fas fa-bars"></i>
+				<i id="menuTlacitkoIcon3" class="fas fa-bars"></i>
 				</button>
-				<div class="collapse navbar-collapse" id="menu-polozky">
+				<div class="collapse navbar-collapse" id="menu-polozky3">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
 							<a class="nav-link" href="index.html">FilmBox</a>
@@ -69,7 +68,7 @@
 							<p class="card-text">Tady bude dluhý popis filmu.</p>
 							<p class="card-text">
 								<small class="text-muted" id="premiera"
-									>Premiéra <strong>24. prosince 2022</strong>, což je za 24
+									>Premiéra <strong>29. 11. 2022.</strong>, což je za 24
 									dní.</small
 								>
 							</p>
@@ -175,4 +174,6 @@
 			</div>
 		</div>
 	</body>
+	<script src="spolecne.js" ></script>
+	<script src="film.js" ></script>
 </html>
